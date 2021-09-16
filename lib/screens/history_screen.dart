@@ -20,7 +20,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         title: Text('History'),
         centerTitle: true,
       actions: [
-        IconButton(icon: Icon(Icons.add),color: Colors.white,Chang
+        IconButton(icon: Icon(Icons.add),color: Colors.white,
         onPressed: _controller.addRecord,
         ),
       ],),
