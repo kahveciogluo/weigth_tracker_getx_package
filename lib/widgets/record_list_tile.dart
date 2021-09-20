@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:weight_tracker_getx_package/models/record.dart';
 
 class RecordlistTile extends StatelessWidget {
-  const RecordlistTile({Key? key}) : super(key: key);
+  final Record record ;
+  const RecordlistTile({Key? key, required this.record}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,17 +13,25 @@ class RecordlistTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
         child: ListTile(
-          leading:Text((DateFormat('EEE, MMM d, ''yy').format(DateTime.now())).toString()),
-          title: Center(child: Text('75', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),)),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(icon: Icon(Icons.edit), color: Colors.black54, onPressed: (){},),
-              IconButton(icon: Icon(Icons.delete), color: Colors.redAccent, onPressed: (){},),
-            ],
-          ),
+          leading:_buildDate(),
+          title: _buildWeight(),
+          trailing: _buildIcons(),
         ),
       ),
     );
+  }
+
+  Text _buildDate() => Text((DateFormat('EEE, MMM d, ''yy').format(record.dateTime).toString()));
+
+  Center _buildWeight() => Center(child: Text(record.weigth.toString(), style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),));
+
+  Row _buildIcons() {
+    return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(icon: Icon(Icons.edit), color: Colors.black54, onPressed: (){},),
+            IconButton(icon: Icon(Icons.delete), color: Colors.redAccent, onPressed: (){},),
+          ],
+        );
   }
 }
