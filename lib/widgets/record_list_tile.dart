@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:weight_tracker_getx_package/models/record.dart';
+import 'package:weight_tracker_getx_package/screen-models/controller.dart';
 
 class RecordlistTile extends StatelessWidget {
   final Record record ;
-  const RecordlistTile({Key? key, required this.record}) : super(key: key);
+  RecordlistTile({Key? key, required this.record}) : super(key: key);
+  final Controller _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class RecordlistTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(icon: Icon(Icons.edit), color: Colors.black54, onPressed: (){},),
-            IconButton(icon: Icon(Icons.delete), color: Colors.redAccent, onPressed: (){},),
+            IconButton(icon: Icon(Icons.delete), color: Colors.redAccent, onPressed: (){ _controller.deleteRecord(record);}),
           ],
         );
   }

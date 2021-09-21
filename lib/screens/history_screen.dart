@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weight_tracker_getx_package/models/record.dart';
 import 'package:weight_tracker_getx_package/screen-models/controller.dart';
 import 'package:weight_tracker_getx_package/widgets/record_list_tile.dart';
 
@@ -15,26 +16,28 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-          appBar: AppBar(
-            title: Text('History'),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.add),
-                color: Colors.white,
-                onPressed: _controller.addRecord,
-              ),
-            ],
+    List<Record> records = _controller.records ;
+
+    return Obx(()=>Scaffold(
+      appBar: AppBar(
+        title: Text('History'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            color: Colors.white,
+            onPressed: _controller.addRecord,
           ),
-          body: _controller.records.isEmpty
-              ? Center(child: Text('You have not weight record yet'))
-              : ListView(
-                  physics: BouncingScrollPhysics(),
-                  children: _controller.records
-                      .map((record) => RecordlistTile(record: record))
-                      .toList(),
-                ),
-        ));
+        ],
+      ),
+      body: records.isEmpty
+          ? Center(child: Text('You have not weight record yet'))
+          : ListView(
+        physics: BouncingScrollPhysics(),
+        children: records
+            .map((record) => RecordlistTile(record: record))
+            .toList(),
+      ),
+    ));
   }
 }
