@@ -13,7 +13,10 @@ class Controller extends GetxController{
 
   void addRecord(){
     records.add(Record(weigth: 100, dateTime: DateTime.now(), note: 'New Record'));
-    print(records.length);
+  }
+
+  void deleteRecord(Record record){
+    records.remove(record);
   }
 
 }
